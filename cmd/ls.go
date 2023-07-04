@@ -27,7 +27,7 @@ including any other details such as key locations and descriptions.`,
 		}
 		defer db.Close()
 
-		rows, err := db.Query("SELECT * FROM IPster")
+		rows, err := db.Query("SELECT id, ip, key, description FROM IPster")
 		if err != nil {
 			fmt.Println(err)
 			return
@@ -35,20 +35,21 @@ including any other details such as key locations and descriptions.`,
 		defer rows.Close()
 
 		var id int
-		var ip, key string
+		var ip, key, description string
 		for rows.Next() {
-			err := rows.Scan(&id, &ip, &key)
+			err := rows.Scan(&id, &ip, &key, &description)
 			if err != nil {
 				fmt.Println(err)
 				return
 			}
-			fmt.Printf("%d: %s, %s\n", id, ip, key)
+			fmt.Printf("%d: %s | %s | %s\n", id, ip, description, key)
 		}
 
 		if err := rows.Err(); err != nil {
 			fmt.Println(err)
 			return
 		}
+
 	},
 }
 

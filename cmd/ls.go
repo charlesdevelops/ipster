@@ -19,6 +19,7 @@ var lsCmd = &cobra.Command{
 	Short: "List all saved addresses",
 	Long: `This command lists out all the IP addresses you have saved,
 including any other details such as key locations and descriptions.`,
+
 	Run: func(cmd *cobra.Command, args []string) {
 		db, err := sql.Open("sqlite", "./data.db")
 		if err != nil {
@@ -34,34 +35,35 @@ including any other details such as key locations and descriptions.`,
 		}
 		defer rows.Close()
 
+		fmt.Println("ID | IP | Description | Key Location")
+		fmt.Println("----------------------------")
 		var id int
-		var ip, key, description string
+		var ip, key, description sql.NullString
 		for rows.Next() {
 			err := rows.Scan(&id, &ip, &key, &description)
 			if err != nil {
 				fmt.Println(err)
 				return
 			}
-			fmt.Printf("%d: %s | %s | %s\n", id, ip, description, key)
-		}
 
-		if err := rows.Err(); err != nil {
-			fmt.Println(err)
-			return
-		}
+			if key.Valid && description.Valid {
+				fmt.Printf("%d: %s | %s | %s\n", id, ip.String, description.String, key.String)
+			} else if key.Valid {
+				fmt.Printf("%d: %s | - | %s\n", id, ip.String, key.String)
+			} else if description.Valid {
+				fmt.Printf("%d: %s | %s | - \n", id, ip.String, description.String)
+			} else {
+				fmt.Printf("%d: %s\n", id, ip.String)
+			}
 
+			if err := rows.Err(); err != nil {
+				fmt.Println(err)
+				return
+			}
+		}
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(lsCmd)
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// lsCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// lsCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }

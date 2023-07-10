@@ -12,11 +12,11 @@ import (
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "IPster",
-	Short: "A brief description of your application",
+	Short: "A CLI application to store IP addresses in the terminal",
 	Long: `IPster is a CLI application that stores IP addresses and optionally, their
-associated details, right here in the terminal. 
+associated details, right here in the terminal for quick access. 
 
-To get started, run: ipster add <IP address> <description> <key location>`,
+To get started, run: ipster add <IP address> -d <description> -k <key location>`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	// Run: func(cmd *cobra.Command, args []string) { },

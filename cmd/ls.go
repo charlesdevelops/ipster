@@ -45,14 +45,14 @@ including any other details such as key locations and descriptions.`,
 				fmt.Println(err)
 				return
 			}
-
-			if key.Valid && description.Valid {
+			switch {
+			case key.Valid && description.Valid:
 				fmt.Printf("%d: %s | %s | %s\n", id, ip.String, description.String, key.String)
-			} else if key.Valid {
+			case key.Valid:
 				fmt.Printf("%d: %s | - | %s\n", id, ip.String, key.String)
-			} else if description.Valid {
+			case description.Valid:
 				fmt.Printf("%d: %s | %s | - \n", id, ip.String, description.String)
-			} else {
+			default:
 				fmt.Printf("%d: %s\n", id, ip.String)
 			}
 

@@ -7,6 +7,10 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
+
+	"database/sql"
+
+	_ "modernc.org/sqlite"
 )
 
 // rootCmd represents the base command when called without any subcommands
@@ -25,6 +29,20 @@ To get started, run: ipster add <IP address> -d <description> -k <key location>`
 // Execute adds all child commands to the root command and sets flags appropriately.
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
+
+	// open db
+	db, openErr := sql.Open("sqlite", "./data.db")
+	if openErr != nil {
+		os.Exit(1)
+	}
+	defer db.Close()
+
+	// Create table if it doesn't exist
+	_, createErr := db.Exec(`CREATE TABLE IF NOT EXISTS IPster (id INTEGER PRIMARY KEY, ip TEXT, key TEXT, description TEXT);`)
+	if createErr != nil {
+		os.Exit(1)
+	}
+
 	err := rootCmd.Execute()
 	if err != nil {
 		os.Exit(1)

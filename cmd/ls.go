@@ -37,6 +37,7 @@ including any other details such as key locations and descriptions.`,
 
 		fmt.Println("ID | IP | Description | Key Location")
 		fmt.Println("----------------------------")
+
 		var id int
 		var ip, key, description sql.NullString
 		for rows.Next() {
@@ -45,6 +46,7 @@ including any other details such as key locations and descriptions.`,
 				fmt.Println(err)
 				return
 			}
+
 			switch {
 			case key.Valid && description.Valid:
 				fmt.Printf("%d: %s | %s | %s\n", id, ip.String, description.String, key.String)

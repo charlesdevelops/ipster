@@ -1,5 +1,5 @@
 /*
-Copyright © 2023 NAME HERE <EMAIL ADDRESS>
+Copyright © 2023 CHARLES WATSON
 */
 package cmd
 
@@ -21,6 +21,8 @@ var lsCmd = &cobra.Command{
 including any other details such as key locations and descriptions.`,
 
 	Run: func(cmd *cobra.Command, args []string) {
+
+		// open db
 		db, err := sql.Open("sqlite", "./data.db")
 		if err != nil {
 			fmt.Println(err)
@@ -28,6 +30,7 @@ including any other details such as key locations and descriptions.`,
 		}
 		defer db.Close()
 
+		// select 1 row at a time
 		rows, err := db.Query("SELECT id, ip, key, description FROM IPster")
 		if err != nil {
 			fmt.Println(err)
@@ -38,8 +41,12 @@ including any other details such as key locations and descriptions.`,
 		fmt.Println("ID | IP | Description | Key Location")
 		fmt.Println("----------------------------")
 
+		// declare variables to store data from db
+		// nullString is a special type that can store empty values, avoiding panics
 		var id int
 		var ip, key, description sql.NullString
+
+		// iterate through rows 1 at a time
 		for rows.Next() {
 			err := rows.Scan(&id, &ip, &key, &description)
 			if err != nil {
@@ -47,6 +54,7 @@ including any other details such as key locations and descriptions.`,
 				return
 			}
 
+			// print row logic
 			switch {
 			case key.Valid && description.Valid:
 				fmt.Printf("%d: %s | %s | %s\n", id, ip.String, description.String, key.String)

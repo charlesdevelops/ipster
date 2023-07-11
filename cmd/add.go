@@ -1,5 +1,5 @@
 /*
-Copyright © 2023 NAME HERE <EMAIL ADDRESS>
+Copyright © 2023 CHARLES WATSON
 */
 package cmd
 
@@ -29,6 +29,7 @@ key location. Example:
 
 ipster add 192.168.0.1 -d "Home router" -k "/home/user/key.pem"`,
 		Run: func(cmd *cobra.Command, args []string) {
+			// edge cases
 			if ip == "" && len(args) != 0 {
 				ip = args[0]
 			} else {
@@ -36,6 +37,7 @@ ipster add 192.168.0.1 -d "Home router" -k "/home/user/key.pem"`,
 				return
 			}
 
+			// open db
 			db, err := sql.Open("sqlite", "./data.db")
 			if err != nil {
 				fmt.Println(err)
@@ -43,6 +45,7 @@ ipster add 192.168.0.1 -d "Home router" -k "/home/user/key.pem"`,
 			}
 			defer db.Close()
 
+			// insert logic dependant on what flags are specified
 			switch {
 			case ip != "" && desc != "" && key != "":
 				db.Query("INSERT INTO IPster (ip, description, key) VALUES (?, ?, ?)", ip, desc, key)
@@ -60,6 +63,8 @@ ipster add 192.168.0.1 -d "Home router" -k "/home/user/key.pem"`,
 func init() {
 	rootCmd.AddCommand(addCmd)
 
+	// stringVarP is a flag that takes a string value, and can be specified with a shorthand
+	// ip has an empty shorthand as it is the default item to add
 	addCmd.Flags().StringVarP(&ip, "ip", "", "", "Add an IP address, no need to specify the flag by default")
 	addCmd.Flags().StringVarP(&desc, "desc", "d", "", "[Optional] Add a description of the address")
 	addCmd.Flags().StringVarP(&key, "key", "k", "", "[Optional] Add the location of the associated SSH key")

@@ -31,24 +31,24 @@ including any other details such as key locations and descriptions.`,
 		defer db.Close()
 
 		// select 1 row at a time
-		rows, err := db.Query("SELECT id, ip, key, description FROM IPster")
+		rows, err := db.Query("SELECT id, ip, user, key, description FROM IPster")
 		if err != nil {
 			fmt.Println(err)
 			return
 		}
 		defer rows.Close()
 
-		fmt.Println("ID | IP | Description | Key Location")
-		fmt.Println("----------------------------")
+		fmt.Println("ID | IP | User | Description | Key Location")
+		fmt.Println("-------------------------------------------")
 
 		// declare variables to store data from db
 		// nullString is a special type that can store empty values, avoiding panics
 		var id int
-		var ip, key, description sql.NullString
+		var ip, user, key, description sql.NullString
 
 		// iterate through rows 1 at a time
 		for rows.Next() {
-			err := rows.Scan(&id, &ip, &key, &description)
+			err := rows.Scan(&id, &ip, &user, &key, &description)
 			if err != nil {
 				fmt.Println(err)
 				return
@@ -56,14 +56,16 @@ including any other details such as key locations and descriptions.`,
 
 			// print row logic
 			switch {
-			case key.Valid && description.Valid:
-				fmt.Printf("%d: %s | %s | %s\n", id, ip.String, description.String, key.String)
-			case key.Valid:
-				fmt.Printf("%d: %s | - | %s\n", id, ip.String, key.String)
-			case description.Valid:
-				fmt.Printf("%d: %s | %s | - \n", id, ip.String, description.String)
+			case user.Valid && description.Valid && key.Valid:
+				fmt.Printf("%d: %s | %s | %s | %s\n", id, ip.String, user.String, description.String, key.String)
+			case user.Valid && description.Valid:
+				fmt.Printf("%d: %s | %s | %s | - \n", id, ip.String, user.String, description.String)
+			case user.Valid && key.Valid:
+				fmt.Printf("%d: %s | %s | - | %s\n", id, ip.String, user.String, key.String)
+			case description.Valid && key.Valid:
+				fmt.Printf("%d: %s | - | %s | %s\n", id, ip.String, description.String, key.String)
 			default:
-				fmt.Printf("%d: %s\n", id, ip.String)
+				fmt.Printf("%d: %s | - | - | - \n", id, ip.String)
 			}
 
 			if err := rows.Err(); err != nil {

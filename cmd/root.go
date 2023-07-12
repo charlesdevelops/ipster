@@ -32,7 +32,7 @@ func Execute() {
 	defer db.Close()
 
 	// Create table if it doesn't exist
-	_, createErr := db.Exec(`CREATE TABLE IF NOT EXISTS IPster (id INTEGER PRIMARY KEY, ip TEXT, key TEXT, description TEXT);`)
+	_, createErr := db.Exec(`CREATE TABLE IF NOT EXISTS IPster (id INTEGER PRIMARY KEY, ip TEXT, user TEXT, key TEXT, description TEXT);`)
 	if createErr != nil {
 		os.Exit(1)
 	}

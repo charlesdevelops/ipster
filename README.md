@@ -1,6 +1,6 @@
-# IPster
+# ipster
 
-IPster is a CLI application that stores IP addresses and their associated details in the terminal for quick access. It allows you to easily add, list, remove, and generate SSH commands for saved IP addresses.
+ipster is a CLI application that stores IP addresses and their associated details in the terminal for quick access. It allows you to easily add, list, remove, and generate SSH commands for saved IP addresses.
 
 ## Installation
 
@@ -12,7 +12,7 @@ go install github.com/charlesdevelops/IPster@latest
 
 ## Usage
 
-The basic usage of IPster is as follows:
+The basic usage of ipster is as follows:
 
 ```shell
 ipster [command]
@@ -61,7 +61,7 @@ ipster add --help
 
 ### Dependencies
 
-IPster depends on the following libraries:
+ipster depends on the following libraries:
 
 - `sqlite3`
 - `cobra` by spf13 (the framework used to build the CLI app)
@@ -70,7 +70,7 @@ IPster depends on the following libraries:
 
 ## Acknowledgements
 
-IPster was written in Go. Many thanks to the following projects and their contributors for their work:
+ipster was written in Go. Many thanks to the following projects and their contributors for their work:
 
 - [sqlite3](https://www.sqlite.org/)
 - [cobra by spf13](https://github.com/spf13/cobra)
@@ -84,4 +84,4 @@ This project is licensed under the [MIT License](LICENSE).
 
 ---
 
-Thank you for using IPster! If you encounter any issues or have suggestions for improvements, please open an issue on the [GitHub repository](https://github.com/charlesdevelops/IPster).
+Thank you for using ipster! If you encounter any issues or have suggestions for improvements, please open an issue on the [GitHub repository](https://github.com/charlesdevelops/IPster).

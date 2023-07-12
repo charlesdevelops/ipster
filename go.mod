@@ -1,4 +1,4 @@
-module github.com/charlesdevelops/IPster
+module github.com/charlesdevelops/ipster
 
 go 1.20
 

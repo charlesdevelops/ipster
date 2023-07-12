@@ -21,7 +21,7 @@ var sshCmd = &cobra.Command{
 	Short: "Generates an ssh command to a saved IP address",
 	Long: `Generates an ssh command to a saved IP address, including any key location
 if one has been specified. The command is printed to the terminal,
-as well as being saved to your clipboard. Usage:
+as well as being saved to your clipboard. Example:
 
 ipster ssh [1]`,
 	Run: func(cmd *cobra.Command, args []string) {

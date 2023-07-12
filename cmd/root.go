@@ -14,7 +14,7 @@ import (
 )
 
 var rootCmd = &cobra.Command{
-	Use:   "IPster",
+	Use:   "ipster",
 	Short: "A CLI application to store IP addresses in the terminal",
 	Long: `IPster is a CLI application that stores IP addresses and optionally, their
 associated details, right here in the terminal for quick access. 

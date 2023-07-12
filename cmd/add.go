@@ -65,18 +65,6 @@ ipster add 192.168.0.1 -d "Home router" -u root -k "/home/user/key.pem"`,
 			default:
 				db.Query("INSERT INTO IPster (ip) VALUES (?)", ip)
 			}
-
-			// // insert logic dependant on what flags are specified
-			// switch {
-			// case ip != "" && desc != "" && key != "":
-			// 	db.Query("INSERT INTO IPster (ip, description, key) VALUES (?, ?, ?)", ip, desc, key)
-			// case ip != "" && desc != "":
-			// 	db.Query("INSERT INTO IPster (ip, description) VALUES (?, ?)", ip, desc)
-			// case ip != "" && key != "":
-			// 	db.Query("INSERT INTO IPster (ip, key) VALUES (?, ?)", ip, key)
-			// default:
-			// 	db.Query("INSERT INTO IPster (ip) VALUES (?)", ip)
-			// }
 		},
 	}
 )

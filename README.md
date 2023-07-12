@@ -50,13 +50,13 @@ ipster add --help
 - Remove entries from the application:
 
   ```shell
-  ipster rm <IP address>
+  ipster rm <entry id>
   ```
 
 - Generate an SSH command for a saved IP address:
 
   ```shell
-  ipster ssh <IP address>
+  ipster ssh <entry id>
   ```
 
 ### Dependencies

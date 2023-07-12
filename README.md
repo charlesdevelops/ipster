@@ -7,7 +7,7 @@ ipster is a CLI application that stores IP addresses and their associated detail
 To install IPster, you can use `go install`. Make sure you have Go installed on your system before proceeding with the installation.
 
 ```shell
-go install github.com/charlesdevelops/IPster@latest
+go install github.com/charlesdevelops/ipster@latest
 ```
 
 ## Usage

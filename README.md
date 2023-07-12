@@ -57,7 +57,12 @@ ipster add --help
 
   ```shell
   ipster ssh <entry id>
-  ```
+  ```  
+We can add an address and connect to it as such:
+<img width="1094" alt="screenshot-01" src="https://github.com/charlesdevelops/ipster/assets/107790118/40b08325-b054-457a-b2de-fc9976c0eefa">  
+<img width="1094" alt="screenshot-02" src="https://github.com/charlesdevelops/ipster/assets/107790118/98b6f2d9-e711-4262-bd22-3f48b57bc265">  
+
+Note that the pictured server, IP address, key, and all related details in these screenshots were deleted and / or decommissioned as appropriate.
 
 ### Dependencies
 

@@ -1,3 +1,4 @@
+[![Go Reference](https://pkg.go.dev/badge/github.com/charlesdevelops/ipster.svg)](https://pkg.go.dev/github.com/charlesdevelops/ipster)
 # ipster
 
 ipster is a CLI application that stores IP addresses and their associated details in the terminal for quick access. It allows you to easily add, list, remove, and generate SSH commands for saved IP addresses.

@@ -50,5 +50,5 @@ ipster rm 1`,
 
 func init() {
 	rootCmd.AddCommand(rmCmd)
-	rmCmd.Flags().BoolVarP(&all, "all", "a", true, "Removes all entries from the application")
+	rmCmd.Flags().BoolVarP(&all, "all", "a", false, "Removes all entries from the application")
 }
